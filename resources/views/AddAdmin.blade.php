@@ -1,0 +1,93 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{$title}}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                   <a href="{{url('client')}}" class="btn btn-default">Company</a> | 
+                   <a href="{{url('shorturl')}}" class="btn btn-default">Short Url's</a> | 
+                   <a href="{{url('AdminList')}}" class="btn btn-default" style="color:green">Create Admin</a>
+                   <a href="{{url('AddAdmin')}}" class="btn btn-default" style="float:right">Invite</a>
+                </div>
+                <form method="post" action="{{url('postAdmin')}}">
+                @csrf
+                <table border="1" cellpadding="8" cellspacing="0" style="width:100%;border:1px solid #000;text-align: center;">
+    <thead>
+      <tr>
+     
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Company Name</th>
+        <th>Role</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+     <tr>
+        <td><input type="text" name="name" value="{{ old('name') }}">
+        <br>
+        @error('name')
+         <span style="color:red;">{{ $message }}</span>
+        @enderror
+    </td>
+    <td>
+      <input type="text" name="email">
+      <br>
+        @error('email')
+         <span style="color:red;">{{ $message }}</span>
+        @enderror
+    </td>
+    <td>
+      <input type="password" name="password">
+      <br>
+        @error('password')
+         <span style="color:red;">{{ $message }}</span>
+        @enderror
+    </td>
+    <td>
+    <select name="company">
+        @foreach($client as $company)
+            <option value=" {{$company->id}}">
+                 {{$company->name}}
+            </option>
+        @endforeach    
+        </select>
+        <br>
+        @error('company')
+         <span style="color:red;">{{ $message }}</span>
+        @enderror
+    </td>
+    
+    <td>
+        <select name="role">
+            <option value="2">
+                 Admin
+            </option>
+        </select>
+        
+        @error('role')
+         <span style="color:red;">{{ $message }}</span>
+        @enderror</td>
+
+     </tr>
+     <tr>
+        <td><button type="submit">Send Invitation</button></td>
+       
+
+     </tr>
+      
+      
+    </tbody>
+  </table>
+</form>
+               </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
