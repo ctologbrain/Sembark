@@ -1,4 +1,4 @@
-Project Description (English Version)
+Project Description
 
 1. I have built this project in Laravel 12.
 2. For authentication, I have used Laravel Breeze.
